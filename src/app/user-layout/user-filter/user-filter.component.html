@@ -1,0 +1,44 @@
+<div class="row">
+  <form class="col s12" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="input-field col s4" >
+        <input
+          id="filed0"
+          type="text"
+          formControlName="name"
+          [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+        >
+        <label for="filed0">Name</label>
+        <span
+          *ngIf="form.get('name').invalid && form.get('name').touched"
+          class="helper-text red-text"
+        > Тhe field must not be empty
+        </span>
+      </div>
+      <div class="input-field col s4" >
+        <input
+          id="filed1"
+          type="text"
+          formControlName="username"
+          [ngClass]="{'invalid': form.get('username').invalid && form.get('username').touched}"
+        >
+        <label for="filed1">Username</label>
+        <span
+          *ngIf="form.get('username').invalid && form.get('username').touched"
+          class="helper-text red-text"
+        > Тhe field must not be empty
+        </span>
+      </div>
+
+      <div class="col s4">
+        <button
+          class="btn waves-effect wavers-light btn-sma"
+          type="submit"
+          [disabled]="!form.valid"
+        >Filter
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<div class="page-title">
+  <a (click)="fetch()" style="cursor: pointer;"><h4>All Users</h4></a>
+  <button
+    (click)="isFilterVisible = !isFilterVisible"
+    class="btn btn-small"
+    [ngClass]="{
+      'active': isFilterVisible,
+      'red': isFiltered()
+    }"
+    data-position="left"
+    data-tooltip="open filter"
+    #tooltip
+  >
+    <i class="material-icons">filter_list</i>
+  </button>
+</div>
+
+<app-user-filter
+*ngIf="isFilterVisible"
+(onFilter)="applyFilter($event)"></app-user-filter>
+
+<div *ngIf="!reloading; else reloadingBlock">
+  <div *ngIf="users.length> 0; else empty">
+    <app-user-list [users]="users" (onDelete)="deleteUsers($event)"></app-user-list>
+  </div>
+  <ng-template #empty>
+    <div class="center">No users found</div>
+  </ng-template>
+</div>
+
+<ng-template #reloadingBlock>
+  <app-loader></app-loader>
+</ng-template>
+

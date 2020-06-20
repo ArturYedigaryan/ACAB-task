@@ -1,0 +1,78 @@
+<form class="col s12" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="input-field" >
+      <input
+        id="filed0"
+        type="text"
+        formControlName="name"
+        [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+      >
+      <label for="filed0" class="active">Name</label>
+      <span
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+        class="helper-text red-text"
+      > Тhe field must not be empty
+      </span>
+    </div>
+    <div class="input-field" >
+      <input
+        id="filed1"
+        type="text"
+        formControlName="username"
+        [ngClass]="{'invalid': form.get('username').invalid && form.get('username').touched}"
+      >
+      <label for="filed1" class="active">Username</label>
+      <span
+        *ngIf="form.get('username').invalid && form.get('username').touched"
+        class="helper-text red-text"
+      > Тhe field must not be empty
+      </span>
+    </div>
+    <div class="input-field" >
+      <input
+        id="filed2"
+        type="email"
+        formControlName="email"
+        [ngClass]="{'invalid': form.get('email').invalid && form.get('email').touched}"
+      >
+      <label for="filed2" class="active">Email</label>
+      <span
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+        class="helper-text red-text"
+      > Тhe field must not be empty
+      </span>
+    </div>
+    <div class="input-field" >
+      <input
+        id="filed3"
+        type="text"
+        formControlName="website"
+        [ngClass]="{'invalid': form.get('website').invalid && form.get('website').touched}"
+      >
+      <label for="filed3" class="active">Website</label>
+      <span
+        *ngIf="form.get('website').invalid && form.get('website').touched"
+        class="helper-text red-text"
+      > Тhe field must not be empty
+      </span>
+    </div>
+  </div>
+
+  <div class="col s4" *ngIf="!isAdd">
+    <button
+      class="btn waves-effect wavers-light btn-sma"
+      type="submit"
+      [disabled]="!form.valid"
+    >Edit
+    </button>
+  </div>
+  <div class="col s4" *ngIf="isAdd">
+    <button
+      class="btn waves-effect wavers-light btn-sma"
+      type="submit"
+      [disabled]="!form.valid"
+    >Add
+    </button>
+  </div>
+
+</form>

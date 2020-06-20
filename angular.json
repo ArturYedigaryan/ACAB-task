@@ -26,7 +26,8 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "acba-task"
+    }
+  },
+  "defaultProject": "acba-task",
+  "cli": {
+    "analytics": "44049203-6b28-4eef-a457-e7039963146d"
+  }
 }

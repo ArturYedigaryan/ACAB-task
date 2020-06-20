@@ -1,0 +1,66 @@
+<table class="highlight mb2">
+  <thead>
+  <tr>
+    <th>№</th>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>
+      <button 
+        class="btn btn-small red"
+        (click)="onSelectDelete()"
+        [disabled]="!deleteUsers.length"
+      >
+        <i class="material-icons">delete</i>
+      </button>
+    </th>
+    <th>
+      <a 
+        class="waves-effect waves-light btn"
+        (click)="addUser()"
+      >Add User</a>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users; let idx=index">
+    <td>{{idx+1}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.email }}</td>
+    <td>
+      <p>
+        <label>
+          <input 
+            type="checkbox"
+            (click)="checkForDelete(user)"
+          />
+          <span>check for delete</span>
+        </label>
+      </p>
+    </td>
+    <td>
+      <button class="btn btn-small grey darken-1" (click)="selectUser(user)">
+        <i class="material-icons">open_in_new</i>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="modal modal-fixed-footer" #modal>
+  <div class="modal-content" *ngIf="selectedUser || isAddUser">
+    <app-user-modal [user]="selectedUser" (closeUserModal)="closeModal()"></app-user-modal>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="modal-action waves-effect waves-black btn-flat"
+      (click)="closeModal()"
+    >Close
+    </button>
+  </div>
+</div>
+
+<div class="modal" #modalDel>
+  <app-delete-info  (isRemove)="isDeleteUser($event)"></app-delete-info>
+</div>
