@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MaterialService } from 'src/app/shared/classes/material.service';
 import { Filter } from 'src/app/model/filter.model';
+import { UsersService } from 'src/app/services/usersService';
 
 @Component({
   selector: 'app-user-filter',
@@ -9,10 +10,8 @@ import { Filter } from 'src/app/model/filter.model';
   styleUrls: ['./user-filter.component.css']
 })
 export class UserFilterComponent implements OnInit, AfterViewInit {
-  @Output() onFilter = new EventEmitter<Filter>();
-  
   form: FormGroup;
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -35,7 +34,7 @@ export class UserFilterComponent implements OnInit, AfterViewInit {
         name: this.form.get('name').value,
         username: this.form.get('username').value
       };
-      this.onFilter.emit(filter);
+      this.usersService.filterUserSubject.next(filter);
     }
   }
 

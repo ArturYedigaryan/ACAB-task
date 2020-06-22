@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component,  Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/model/user.model';
 import { UsersService } from 'src/app/services/usersService';
@@ -8,15 +8,11 @@ import { UsersService } from 'src/app/services/usersService';
   templateUrl: './user-modal.component.html',
   styleUrls: ['./user-modal.component.css']
 })
-export class UserModalComponent implements OnInit, OnChanges {
+export class UserModalComponent implements OnChanges {
   @Input() user: User;
-  @Output() closeUserModal = new EventEmitter<boolean>();
   form: FormGroup;
   isAdd = false;
   constructor(private usersService: UsersService) { }
-
-  ngOnInit(): void {
-  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!changes.user.currentValue) {
@@ -56,7 +52,7 @@ export class UserModalComponent implements OnInit, OnChanges {
         this.usersService.userEditSubject.next(this.user);
       }
 
-      this.closeUserModal.emit();
+      this.usersService.closeModalSubject.next(true);
     }
   }
 }

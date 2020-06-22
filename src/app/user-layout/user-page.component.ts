@@ -22,20 +22,30 @@ export class UserPageComponent implements OnInit, AfterViewInit, OnDestroy  {
   userSub: Subscription;
   addUserSub: Subscription;
   editUserSub: Subscription;
+  filterUserSub: Subscription;
+  deleteUserSub: Subscription;
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
     this.reloading = true;
     this.fetch();
-    this.usersService.addUserSubject.subscribe(user => {
+    this.addUserSub = this.usersService.addUserSubject.subscribe(user => {
       this.usersService.createUser(user).subscribe(data => {
         this.users.unshift(data);
       });
     });
 
-    this.usersService.userEditSubject.subscribe(user => {
+    this.editUserSub = this.usersService.userEditSubject.subscribe(user => {
       this.usersService.editUser(user).subscribe(data => {
       });
+    });
+
+    this.deleteUserSub = this.usersService.deleteUsersSubject.subscribe(users => {
+      this.deleteUsers(users);
+    });
+
+    this.filterUserSub = this.usersService.filterUserSubject.subscribe(filter => {
+      this.applyFilter(filter);
     });
   }
 
@@ -54,6 +64,14 @@ export class UserPageComponent implements OnInit, AfterViewInit, OnDestroy  {
 
     if ( this.editUserSub) {
       this.editUserSub.unsubscribe();
+    }
+
+    if ( this.filterUserSub) {
+      this.filterUserSub.unsubscribe();
+    }
+
+    if (this.deleteUserSub) {
+      this.deleteUserSub.unsubscribe();
     }
   }
   fetch() {
@@ -79,7 +97,7 @@ export class UserPageComponent implements OnInit, AfterViewInit, OnDestroy  {
     });
   }
 
-  deleteUsers(users) {
+  deleteUsers(users: User[]) {
     for (const user of users) {
       this.usersService.removeUser(user.id).subscribe(data => {
         this.users = this.users.filter(u => u.id !== user.id);

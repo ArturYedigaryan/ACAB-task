@@ -1,9 +1,9 @@
-import { Filter } from './../model/filter.model';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, from, Subject} from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../model/user.model';
+import { Filter } from '../model/filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,10 @@ import { User } from '../model/user.model';
 export class UsersService {
   userEditSubject = new Subject<User>();
   addUserSubject = new Subject<User>();
+  filterUserSubject = new Subject<Filter>();
+  deleteUsersSubject = new Subject<User[]>();
+  closeModalSubject = new Subject<boolean>();
+
   constructor(private http: HttpClient) {
   }
 

@@ -6,7 +6,7 @@
     <th>Username</th>
     <th>Email</th>
     <th>
-      <button 
+      <button
         class="btn btn-small red"
         (click)="onSelectDelete()"
         [disabled]="!deleteUsers.length"
@@ -15,7 +15,7 @@
       </button>
     </th>
     <th>
-      <a 
+      <a
         class="waves-effect waves-light btn"
         (click)="addUser()"
       >Add User</a>
@@ -31,7 +31,7 @@
     <td>
       <p>
         <label>
-          <input 
+          <input
             type="checkbox"
             (click)="checkForDelete(user)"
           />
@@ -50,7 +50,7 @@
 
 <div class="modal modal-fixed-footer" #modal>
   <div class="modal-content" *ngIf="selectedUser || isAddUser">
-    <app-user-modal [user]="selectedUser" (closeUserModal)="closeModal()"></app-user-modal>
+    <app-user-modal [user]="selectedUser"></app-user-modal>
   </div>
   <div class="modal-footer">
     <button

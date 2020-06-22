@@ -15,13 +15,11 @@
   </button>
 </div>
 
-<app-user-filter
-*ngIf="isFilterVisible"
-(onFilter)="applyFilter($event)"></app-user-filter>
+<app-user-filter *ngIf="isFilterVisible"></app-user-filter>
 
 <div *ngIf="!reloading; else reloadingBlock">
   <div *ngIf="users.length> 0; else empty">
-    <app-user-list [users]="users" (onDelete)="deleteUsers($event)"></app-user-list>
+    <app-user-list [users]="users"></app-user-list>
   </div>
   <ng-template #empty>
     <div class="center">No users found</div>

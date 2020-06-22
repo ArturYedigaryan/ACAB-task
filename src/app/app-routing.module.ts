@@ -5,8 +5,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./user-layout/user.module').then(m => m.UserModule)
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
-]
+];
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
